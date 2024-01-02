@@ -11,8 +11,7 @@ module.exports = (env, argv) => {
             minimize: isProduction, // Only minimize in production mode
         },
         entry: {
-            frontend: './src/frontend.js',
-            backend: './src/backend.js'
+            'admin': './src/index.js',
         },
         output: {
             path: path.resolve(__dirname, 'assets'),

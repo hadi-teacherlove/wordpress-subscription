@@ -1,0 +1,14 @@
+#wordpress-subscription-container {
+    padding: 1.5rem;
+    background-color: #FFFFFF;
+
+    .subscription-navigation {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 15px;
+    }
+}
