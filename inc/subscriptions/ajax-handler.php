@@ -28,6 +28,7 @@ class Ajax_Handler {
 			[
 				'post_title' => $data['title'],
 				'post_type'  => Subscriptions_Post_Type::POST_TYPE,
+				'post_status'=> 'draft',
 			]
 		);
 
