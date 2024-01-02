@@ -13,6 +13,16 @@ class init {
 	}
 
 	public function admin_assets() {
+		$current_screen = get_current_screen();
+		$allowed_screens = [
+			'sellkit_page_sellkit-subscription',
+			'sellkit_page_sellkit-active-subscription',
+		];
+
+		if ( ! in_array( $current_screen->id, $allowed_screens, true ) ) {
+			return;
+		}
+
 		wp_enqueue_script( 
 			'wordpress-subscription-admin',
 			WORDPRESS_SUBSCRIPTION_ASSETS . 'admin.js',
@@ -34,6 +44,9 @@ class init {
 			[
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'wordpress-subscription' ),
+				'urls'     => [
+					'files' => WORDPRESS_SUBSCRIPTION_URL . 'files/',
+				],
 			]
 		);
 	}

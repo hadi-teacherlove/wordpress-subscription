@@ -5,6 +5,8 @@ namespace Wordpress_Subscription\Inc\Post_Types;
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 class Subscriptions_Post_Type {
+	const POST_TYPE = 'wp-subscriptions';
+
     public function __construct() {
         add_action( 'init', [ $this, 'register_post_type' ] );
     }
@@ -33,7 +35,7 @@ class Subscriptions_Post_Type {
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'query_var'           => true,
-			'rewrite'             => [ 'slug' => 'wp-subscriptions' ],
+			'rewrite'             => [ 'slug' => self::POST_TYPE ],
 			'capability_type'     => 'post',
 			'has_archive'         => true,
 			'hierarchical'        => false,
@@ -42,7 +44,7 @@ class Subscriptions_Post_Type {
 			'supports'            => [ 'title', 'custom-fields' ],
 		];
 
-		register_post_type( 'wp-subscriptions', $args );
+		register_post_type( self::POST_TYPE, $args );
     }
 };
 
