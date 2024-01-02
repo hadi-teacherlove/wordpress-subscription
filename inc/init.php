@@ -7,6 +7,11 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 class init {
     public function __construct() {
 		add_action( 'admin_menu', [ $this, 'add_admin_menu' ], 200 );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_assets' ] );
+	}
+
+	public function admin_assets() {
+		
 	}
 
 	public function add_admin_menu() {
@@ -32,16 +37,11 @@ class init {
 	}
 
 	public function subscription_page() {
-		echo '<div class="wrap">';
-		echo '<h1>' . __( 'Subscription', 'wordpress-subscription' ) . '</h1>';
-		echo '</div>';
+		echo '<div class="wrap" id="wordpress-subscription-container"></div>';
 	}
 
 	public function active_subscription_page() {
-		echo '<div class="wrap">';
-		echo '<h1>' . __( 'Active Subscriptions', 'wordpress-subscription' ) . '</h1>';
-		echo '</div>';
-	
+		echo '<div class="wrap" id="wordpress-subscription-active-plans"></div>';
 	}
 }
 
