@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WordPress Subscription
  * Plugin URI: 
- * Description: A plugin to create a subscription for WordPress
+ * Description: A plugin to create subscription solutions for WordPress
  * Version: 1.0
  * Author: Hadi Mohammadi
  * Author URI:
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 class Cloud_Portal_Wordpress_Subscription {
 	public function __construct() {
 		$this->constants();
-		require_once plugin_dir_path( __FILE__ ) . 'inc/init.php';
+		require_once WORDPRESS_SUBSCRIPTION_DIR . 'inc/class-init.php';
 	}
 
 	private function constants() {

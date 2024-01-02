@@ -85,7 +85,10 @@ class init {
 		$files = [
 			'inc/post-types/active-subscriptions-post-type',
 			'inc/post-types/subscriptions-post-type',
-			'inc/subscriptions/ajax-handler',
+			'inc/subscriptions/class-subscriptions',
+			'inc/subscriptions/class-ajax-handler',
+			'inc/active-subscriptions/class-ajax-handler',
+			'inc/active-subscriptions/class-active-subscriptions',
 		];
 
 		foreach ( $files as $file ) {
