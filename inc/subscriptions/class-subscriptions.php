@@ -7,12 +7,27 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 use Wordpress_Subscription\Inc\Post_Types\Subscriptions_Post_Type;
 
 class Subscriptions {
-	public function __construct() {
-		add_action( 'woocommerce_order_status_completed', [ $this, 'check_to_active_subscription' ] );
-	}
+	public static function calculate_subscription_duration_by_seconds( $period ) {
+		$day = 86400;
 
-	public function check_to_active_subscription( $order_id ) {
-		// We check if the order has a product that trigger a subscription, Then we active subscription for the user.
+		switch ( $period ) {
+			case 'daily':
+				return $day;
+			case 'weekly':
+				return $day * 7;
+			case 'monthly':
+				return $day * 30;
+			case 'quarterly':
+				return $day * 30 * 3;
+			case 'half-yearly':
+				return $day * 30 * 6;
+			case 'yearly':
+				return $day * 365;
+			case '2-years':
+				return $day * 365 * 2;
+			case '3-years':
+				return $day * 365 * 3;
+		}
 	}
 }
 

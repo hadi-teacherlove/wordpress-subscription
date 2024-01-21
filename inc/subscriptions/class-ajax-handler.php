@@ -5,8 +5,11 @@ namespace Wordpress_Subscription\Inc\Subscriptions;
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 use Wordpress_Subscription\Inc\Post_Types\Subscriptions_Post_Type;
+use Wordpress_Subscription\Inc\Subscriptions\WooCommerce;
 
 class Ajax_Handler {
+	const SUBSCRIPTION_DATA = 'wordpress-subscription-data';
+
 	public function __construct() {
 		add_action( 'wp_ajax_wordpress_subscription_ajax_handler', [ $this, 'ajax_handler' ] );
 	}
@@ -72,7 +75,8 @@ class Ajax_Handler {
 	private function get_subscription() {
 		$id = filter_input( INPUT_POST,'id', FILTER_SANITIZE_NUMBER_INT );
 
-		$subscription = get_post( $id );
+		$subscription       = get_post( $id );
+		$subscription->data = get_post_meta( $id, self::SUBSCRIPTION_DATA, true );
 
 		wp_send_json_success( $subscription );
 	}
@@ -107,6 +111,24 @@ class Ajax_Handler {
 		$post = get_post( $post );
 
 		wp_send_json_success( $post );
+	}
+
+	private function save_subscription() {
+		$data = filter_input( INPUT_POST, 'fields', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY ); 
+		$id   = filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
+
+		if ( 'purchase-woo-product' === $data['subscription_trigger'] ) {
+			$product_id          = $data['subscription_woo_product_id'];
+			$products_by_trigger = get_option( WooCommerce::PRODUCTS_WITH_TRIGGER, [] );
+
+			$products_by_trigger[ $product_id ] = $id; 
+
+			update_option( WooCommerce::PRODUCTS_WITH_TRIGGER, $products_by_trigger );
+		}
+
+		update_post_meta( $id, self::SUBSCRIPTION_DATA, $data );
+
+		wp_send_json_success();
 	}
 }
 

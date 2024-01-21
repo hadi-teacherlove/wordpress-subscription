@@ -87,6 +87,7 @@ class init {
 			'inc/post-types/subscriptions-post-type',
 			'inc/subscriptions/class-subscriptions',
 			'inc/subscriptions/class-ajax-handler',
+			'inc/subscriptions/class-woocommerce',
 			'inc/active-subscriptions/class-ajax-handler',
 			'inc/active-subscriptions/class-active-subscriptions',
 		];
